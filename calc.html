@@ -250,8 +250,8 @@
 	<div>
 	<select id="tipo_teja" name="tipo_teja">
 		<option value="" selected>Seleccione el tipo de teja</option>
-		<option value="teja_colonial">Teja Colonial</option>
-		<option value="teja_francesa">Teja Francesa</option>
+		<option value="Teja Colonial">Teja Colonial</option>
+		<option value="Teja Francesa">Teja Francesa</option>
 	</select>
 	</div>
 	<div>
@@ -265,12 +265,12 @@
 	<div>
 	<select id="color" name="color">
 		<option value="" selected>Seleccione el color</option>
-		<option value="blanco">Blanco</option>
-		<option value="marron">Marron</option>
-		<option value="azul">Azul</option>
-		<option value="negro">Negro</option>
-		<option value="verde">Verde</option>
-		<option value="custom">Personalizado</option>
+		<option value="Blanco">Blanco</option>
+		<option value="Marron">Marron</option>
+		<option value="Azul">Azul</option>
+		<option value="Negro">Negro</option>
+		<option value="Verde">Verde</option>
+		<option value="Personalizado">Personalizado</option>
 	</select>
 	</div>
 	<div>
@@ -287,13 +287,15 @@
 	</div>
 
 	<div class="well">
-		<div>
-			<strong>Calculo de tejas</strong>
-		</div>
-		<div id="print_tipo" class="h6">Tipo: </div>
-		<div id="print_color" class="h6">Color: </div>
-		<div id="print_tejas" class="h6">Cantidad Tejas: </div>
-		<div id="print_cumbreras" class="h6">Cantidad cumbreras: </div>
+		<div class="h5 strong"><strong>Calculo de tejas</strong></div>
+		<div class="h6 strong"><strong>Tipo: </strong></div>
+		<div id="print_tipo" class="h6"></div>
+		<div class="h6 strong"><strong>Color </strong></div>
+		<div id="print_color" class="h6"></div>
+		<div class="h6 strong"><strong>Cantidad tejas:</strong></div>
+		<div id="print_tejas" class="h6"></div>
+		<div class="h6 strong"><strong>Cantidad cumbreras:</strong></div>
+		<div id="print_cumbreras" class="h6"></div>
 		
 		<textarea class="form-control" rows="2" readonly placeholder="Default"></textarea>
 	</div>
@@ -308,8 +310,23 @@
 	     	var ancho = $("#ancho_techo").val();
 	     	var largo1 = $("#largo_techo").val();
 	     	var largo2 = $("#segundo_largo_techo").val();
-	     	$("#print_tipo").text($("#print_tipo").text() + tipo_teja);
-	     	$("#print_color").text($("#color").text() + color);
+
+	     	$("#print_tipo").text(tipo_teja);
+	     	$("#print_color").text(color);
+
+			if (tipo_techo == "Techo_1") {
+				$("#print_color").text("teCHO A UN aguaAGUA");    
+			} else {
+				if (tipo_techo == "Techo_2a") {
+			    	$("#print_color").text("teCHO simetrico");
+			    } else {
+			       	if (tipo_techo == "Techo_2b") {
+		        		$("#print_color").text("teCHO a dos aguass asimetrico");
+			       	} else { $("#print_color").text("error"); }
+			    
+			    }
+			}
+
     	});
 
 	});
