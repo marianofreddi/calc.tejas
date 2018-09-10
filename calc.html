@@ -328,10 +328,10 @@
 	     	var ancho = $("#ancho_techo").val();
 	     	var largo1 = $("#largo_techo").val();
 	     	var largo2 = $("#segundo_largo_techo").val();
-	     	var m2xteja = 0.6;
-	     	var cant_cumbr = ancho / 0.35;
+	     	var m2xteja = 0.6;      //Valor inicial
+	     	var cant_cumbr = ancho / 0.35;    //valor inicial
 	     	var m2;
-	     	var cant_tejas = "falto ingresar cantid";
+	     	var cant_tejas = "falto ingresar cantidad";
 			$("#print_cumbreras").text(cant_cumbr.toFixed(0));
 
 	     	$("#print_tipo").text(tipo_teja);
@@ -348,7 +348,11 @@
 					$("#print_tejas").text(cant_tejas.toFixed(0));
 			    } else {
 			       	if (tipo_techo == "Techo_2b") {
-		        		$("#print_tejas").text("teCHO a dos aguass asimetrico");
+		        		var techo_a = ancho * largo1 *;
+		        		var techo_b = ancho * largo2 *;
+		        		var m2 = techo_a + techo_b;
+						var cant_tejas = m2 * m2xteja;
+						$("#print_tejas").text(cant_tejas.toFixed(0));
 			       	} else { $("#print_tejas").text("***ERROR***");}
 			    }
 			}
