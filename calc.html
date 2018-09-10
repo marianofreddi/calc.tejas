@@ -247,6 +247,7 @@
   </style>
 
 <body>
+
 	<div>
 	<select id="tipo_teja" name="tipo_teja">
 		<option value="" selected>Seleccione el tipo de teja</option>
@@ -255,7 +256,7 @@
 	</select>
 	</div>
 	<div>
-	<select id="tipo_techo" name="tipo_techo">
+	<select id="tipo_techo" onchange="ocultar_input()" name="tipo_techo">
 		<option value="" selected>Seleccione el tipo de techo</option>	
 		<option value="Techo_1">Techo a 1 agua</option>
 		<option value="Techo_2a">Techo a 2 aguas simetrico</option>
@@ -280,7 +281,7 @@
 	<input type="number" id="largo_techo" min="1" step="0.1" placeholder="Largo de techo">
 	</div>
 	<div>
-	<input type="number" id="segundo_largo_techo" min="1" step="0.1" placeholder="Segundo largo techo Asimetrico">
+	<input type="number" id="segundo_largo_techo" class="hidden" min="1" step="0.1" placeholder="Segundo largo techo Asimetrico">
 	</div>
 	<div>
 		<button id="calc">Calcular</button>
@@ -301,6 +302,23 @@
 	</div>
 <script type="text/javascript">
 	
+	// on-off del input
+	function ocultar_input(){
+	 	var tipo_techo = $("#tipo_techo").val();
+
+		switch (tipo_techo) {
+			case "Techo_1":
+			$("#segundo_largo_techo").addClass("hidden");
+			break;
+			case "Techo_2a":
+			$("#segundo_largo_techo").addClass("hidden");
+			break;
+			case "Techo_2b":
+			$("#segundo_largo_techo").removeClass("hidden");
+		}
+	}
+
+
 	$(document).ready(function(){
    		
    		$("#calc").click(function(){
@@ -310,23 +328,30 @@
 	     	var ancho = $("#ancho_techo").val();
 	     	var largo1 = $("#largo_techo").val();
 	     	var largo2 = $("#segundo_largo_techo").val();
+	     	var m2xteja = 0.6;
+	     	var cant_cumbr = ancho / 0.35;
+	     	var m2;
+	     	var cant_tejas = "falto ingresar cantid";
+			$("#print_cumbreras").text(cant_cumbr.toFixed(0));
 
 	     	$("#print_tipo").text(tipo_teja);
 	     	$("#print_color").text(color);
 
 			if (tipo_techo == "Techo_1") {
-				$("#print_color").text("teCHO A UN aguaAGUA");    
+				var m2 = ancho * largo1;
+				var cant_tejas = m2 * m2xteja;
+				$("#print_tejas").text(cant_tejas.toFixed(0));
 			} else {
 				if (tipo_techo == "Techo_2a") {
-			    	$("#print_color").text("teCHO simetrico");
+			    	var m2 = ancho * largo1 * 2;
+					var cant_tejas = m2 * m2xteja;
+					$("#print_tejas").text(cant_tejas.toFixed(0));
 			    } else {
 			       	if (tipo_techo == "Techo_2b") {
-		        		$("#print_color").text("teCHO a dos aguass asimetrico");
-			       	} else { $("#print_color").text("error"); }
-			    
+		        		$("#print_tejas").text("teCHO a dos aguass asimetrico");
+			       	} else { $("#print_tejas").text("***ERROR***");}
 			    }
 			}
-
     	});
 
 	});
